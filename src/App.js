@@ -1,11 +1,14 @@
 import React from 'react'
 
-function App() {
+import Home from './pages/Home'
+
+import GlobalStyle from './styles/global'
+
+export default () => {
   return (
-    <div>
-      <h1>App JS</h1>
-    </div>
+    <>
+      <Home />
+      <GlobalStyle />
+    </>
   )
 }
-
-export default App

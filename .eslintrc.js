@@ -18,5 +18,7 @@ module.exports = {
     'no-unused-vars': 'off',
     camelcase: 'off',
     'no-undef': 'off',
+    'react/display-name': 'off',
+    'react/prop-types': [0],
   },
 }
