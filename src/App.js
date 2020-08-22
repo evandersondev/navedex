@@ -1,13 +1,12 @@
 import React from 'react'
 
-import Home from './pages/Home'
-
+import Routes from './routes'
 import GlobalStyle from './styles/global'
 
 export default () => {
   return (
     <>
-      <Home />
+      <Routes />
       <GlobalStyle />
     </>
   )

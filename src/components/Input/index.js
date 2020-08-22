@@ -2,11 +2,26 @@ import React from 'react'
 
 import { Container } from './styles'
 
-export default ({ label, name, type = 'text' }) => {
+export default ({
+  label,
+  name,
+  placeholder,
+  type = 'text',
+  width,
+  className,
+  pattern,
+  required,
+  ...rest
+}) => {
   return (
-    <Container>
+    <Container width={width} className={className}>
       <label htmlFor={name}>{label}</label>
-      <input type={type} id={name} placeholder={label} />
+      <input
+        {...rest}
+        type={type}
+        id={name}
+        placeholder={placeholder || label}
+      />
     </Container>
   )
 }

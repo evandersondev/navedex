@@ -13,9 +13,21 @@ import {
   ActionsContainer,
 } from './styles'
 
-export default () => {
+export default ({ enable, setModal, setAlert }) => {
+  const handleDeletNaver = () => {
+    setAlert({
+      title: 'Excluir Naver',
+      message: 'Tem certeza que deseja excluir este Naver?',
+      actions: true,
+      enable: true,
+    })
+  }
+
+  const closeModal = () => {
+    setModal({ enable: false })
+  }
   return (
-    <Container>
+    <Container enable={enable}>
       <ModalContainer>
         <AvatarContainer>
           <img
@@ -24,7 +36,7 @@ export default () => {
           />
         </AvatarContainer>
         <InfoContainer>
-          <button type="button">
+          <button type="button" onClick={closeModal}>
             <img src={closeIcon} alt="close" />
           </button>
 
@@ -40,7 +52,7 @@ export default () => {
           </Info>
 
           <ActionsContainer>
-            <button>
+            <button type="button" onClick={handleDeletNaver}>
               <img src={trashIcon} alt="delete" />
             </button>
             <button>

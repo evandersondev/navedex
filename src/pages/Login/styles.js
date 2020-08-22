@@ -25,4 +25,8 @@ export const Form = styled.form`
     height: 60px;
     margin-bottom: 62px;
   }
+
+  button {
+    margin-left: -12px;
+  }
 `

@@ -2,10 +2,19 @@ import React from 'react'
 
 import { Container } from './styles'
 
-export default ({ type, name, width = '176px' }) => {
+export default ({
+  type,
+  name,
+  onClick,
+  className,
+  width = '176px',
+  color = 'dark',
+}) => {
   return (
-    <Container width={width}>
-      <button type={type}>{name}</button>
+    <Container className={className} width={width} color={color}>
+      <button onClick={onClick} type={type}>
+        {name}
+      </button>
     </Container>
   )
 }

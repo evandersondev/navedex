@@ -8,7 +8,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  *, body, input, button {
+  *, body, input, button, a {
     font-family: 'Montserrat'
   }
 

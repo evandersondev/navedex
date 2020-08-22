@@ -22,6 +22,23 @@ export const HeaderContent = styled.div`
     font-weight: 600;
     font-size: 40px;
   }
+
+  a {
+    width: 176px;
+    height: 40px;
+    background: #212121;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #fff;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: #434343;
+    }
 `
 
 export const ListCard = styled.div`

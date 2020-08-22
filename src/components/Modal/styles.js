@@ -3,12 +3,12 @@ import styled from 'styled-components'
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  z-index: 10;
+  z-index: 5;
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
-  display: flex;
+  display: ${props => (props.enable ? 'flex' : 'none')};
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
@@ -22,6 +22,16 @@ export const ModalContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   background: #fff;
+  animation: modal ease-out 0.2s;
+
+  @keyframes modal {
+    from {
+      transform: scale(1.1);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
 
   @media (max-width: 840px) {
     grid-template-columns: 180px 1fr;
