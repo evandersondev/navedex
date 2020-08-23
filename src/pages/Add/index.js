@@ -6,45 +6,39 @@ import Header from '../../components/Header'
 import Input from '../../components/Input'
 import backIcon from '../../assets/back.svg'
 import Button from '../../components/Button'
+import Alert from '../../components/Alert'
+import InputDate from '../../components/InputDate'
 
 import { Container, ContentContainer, HeaderContent, Form } from './styles'
-import Alert from '../../components/Alert'
 
 export default () => {
   const { goBack } = useHistory()
   const [alert, setAlert] = useState({})
 
-  const [naver, setNaver] = useState({
-    name: '',
-    age: '',
-    projects: '',
-    office: '',
-    timeJob: '',
-    avatar: '',
-  })
+  const [name, setName] = useState('')
+  const [age, setAge] = useState('')
+  const [projects, setProjects] = useState('')
+  const [office, setOffice] = useState('')
+  const [timeJob, setTimeJob] = useState('')
+  const [avatar, setAvatar] = useState('')
 
   const handleSubmitForm = async e => {
     e.preventDefault()
-    console.log(naver.age)
+    try {
+      await api.createNaver({ name, age, projects, office, timeJob, avatar })
 
-    // try {
-    //   await api.createNaver({ ...naver })
-    //   setAlert({
-    //     title: 'Naver criado',
-    //     message: 'Naver criado com sucesso!',
-    //     enable: true,
-    //   })
-    //   setNaver({
-    //     name: '',
-    //     age: '',
-    //     projects: '',
-    //     office: '',
-    //     timeJob: '',
-    //     avatar: '',
-    //   })
-    // } catch (err) {
-    //   console.log(err)
-    // }
+      setAlert({
+        title: 'Naver criado',
+        message: 'Naver criado com sucesso!',
+        enable: true,
+      })
+    } catch (err) {
+      setAlert({
+        title: 'Data errada ou campo invalido!',
+        message: 'Verifique todos os campos e tente novamente.',
+        enable: true,
+      })
+    }
   }
 
   return (
@@ -61,49 +55,48 @@ export default () => {
         </HeaderContent>
         <Form onSubmit={handleSubmitForm}>
           <Input
-            value={naver.name}
-            onChange={e => setNaver({ ...naver, name: e.target.value })}
+            value={name}
+            onChange={e => setName(e.target.value)}
             type="text"
-            label="Nome"
             name="name"
+            label="Nome"
             className="name"
           />
           <Input
-            value={naver.age}
-            onChange={e => setNaver({ ...naver, age: e.target.value })}
-            type="date"
-            placeholder="dd/mm/yyyy"
+            value={office}
+            onChange={e => setOffice(e.target.value)}
+            type="text"
+            label="Cargo"
+            name="office"
+            className="office"
+          />
+          <InputDate
+            value={age}
+            className="age"
             label="Idade"
             name="age"
-            className="age"
+            placeholder="Idade"
+            onChange={setAge}
+          />
+          <InputDate
+            value={timeJob}
+            className="time-job"
+            label="Tempo de empresa"
+            name="timeJob"
+            placeholder="Tempo de empresa"
+            onChange={setTimeJob}
           />
           <Input
-            value={naver.projects}
-            onChange={e => setNaver({ ...naver, projects: e.target.value })}
+            value={projects}
+            onChange={e => setProjects(e.target.value)}
             type="text"
             label="Projetos que participou"
             name="projects"
             className="projects"
           />
           <Input
-            value={naver.office}
-            onChange={e => setNaver({ ...naver, office: e.target.value })}
-            type="text"
-            label="Cargo"
-            name="office"
-            className="office"
-          />
-          <Input
-            value={naver.timeJob}
-            onChange={e => setNaver({ ...naver, timeJob: e.target.value })}
-            type="text"
-            label="Tempo de empresa"
-            name="time-job"
-            className="time-job"
-          />
-          <Input
-            value={naver.avatar}
-            onChange={e => setNaver({ ...naver, avatar: e.target.value })}
+            value={avatar}
+            onChange={e => setAvatar(e.target.value)}
             type="text"
             label="URL da foto do Naver"
             name="avatar"

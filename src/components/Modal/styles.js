@@ -12,6 +12,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 `
 export const ModalContainer = styled.div`
   width: 90%;

@@ -31,10 +31,10 @@ export default {
   async createNaver({ name, age, projects, office, timeJob, avatar }) {
     await api.post('navers', {
       name,
-      birthdate: age,
+      birthdate: age.toLocaleDateString('pt-BR'),
       project: projects,
       job_role: office,
-      admission_date: timeJob,
+      admission_date: timeJob.toLocaleDateString('pt-BR'),
       url: avatar,
     })
   },

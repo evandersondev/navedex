@@ -9,8 +9,6 @@ export default ({
   type = 'text',
   width,
   className,
-  pattern,
-  required,
   ...rest
 }) => {
   return (

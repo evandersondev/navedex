@@ -54,9 +54,9 @@ export const Form = styled.form`
   grid-template-rows: repeat(4, 1fr);
   grid-gap: 0 32px;
   grid-template-areas:
-    'name age'
-    'projects office'
-    'time-job avatar'
+    'name office'
+    'age time-job'
+    'projects avatar'
     'free button';
 
   @media (max-width: 530px) {
