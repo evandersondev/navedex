@@ -5,6 +5,7 @@ import PrivateRoute from './pages/PrivateRoute'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Add from './pages/Add'
+import Edit from './pages/Edit'
 
 const Routes = () => {
   return (
@@ -13,6 +14,7 @@ const Routes = () => {
         <Route exact path="/" component={Login} />
         <PrivateRoute path="/home" component={Home} />
         <PrivateRoute path="/add" component={Add} />
+        <PrivateRoute path="/edit" component={Edit} />
         <Redirect from="*" to="/" />
       </Switch>
     </BrowserRouter>

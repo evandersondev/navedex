@@ -4,23 +4,24 @@ import api from '../../services/api'
 
 import Header from '../../components/Header'
 import Card from '../../components/Card'
-import Modal from '../../components/Modal'
 import Alert from '../../components/Alert'
 
-import { Container, Content, HeaderContent, ListCard } from './styles'
+import { Container, Content, HeaderContent, EmptyContent } from './styles'
 
 export default () => {
   const [alert, setAlert] = useState({})
-  const [modal, setModal] = useState({})
+  const [navers, setNavers] = useState([])
 
   useEffect(() => {
-    api.fecthAllNavers()
-  }, [])
+    const getNavers = async () => {
+      setNavers(await api.fecthAllNavers())
+    }
+    getNavers()
+  }, [navers])
 
   return (
     <Container>
       <Alert {...alert} setAlert={setAlert} />
-      <Modal {...modal} setModal={setModal} setAlert={setAlert} />
 
       <Header />
       <Content>
@@ -29,15 +30,16 @@ export default () => {
           <Link to="/add">Adicionar Naver</Link>
         </HeaderContent>
 
-        <ListCard>
-          <Card
-            avatar="https://i.pinimg.com/originals/8b/da/ca/8bdaca81d5ddbaeb92b61d6b5787d866.jpg"
-            name="Joana Help"
-            office="Fullstack Javascript"
-            setAlert={setAlert}
-            setModal={setModal}
-          />
-        </ListCard>
+        {navers.length > 0 ? (
+          <Card navers={navers} setAlert={setAlert} />
+        ) : (
+          <EmptyContent>
+            <h1>Não há navers cadastrados</h1>
+            <p>
+              Clique em <strong>Adicionar naver</strong> para cadastrar
+            </p>
+          </EmptyContent>
+        )}
       </Content>
     </Container>
   )

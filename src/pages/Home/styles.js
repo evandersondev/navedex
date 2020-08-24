@@ -11,6 +11,29 @@ export const Container = styled.div`
 export const Content = styled.div`
   height: calc(100% - 130px);
 `
+export const EmptyContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #9e9e9e;
+
+  h1 {
+    margin-top: 44px;
+
+    font-weight: 500;
+  }
+
+  p {
+    margin-top: 16px;
+    font-weight: 18px;
+  }
+
+  strong {
+    color: #212121aa;
+  }
+`
+
 export const HeaderContent = styled.div`
   width: 100%;
   display: flex;
@@ -39,24 +62,4 @@ export const HeaderContent = styled.div`
     &:hover {
       background: #434343;
     }
-`
-
-export const ListCard = styled.div`
-  width: 100%;
-  margin-top: 32px;
-  display: grid;
-  grid-gap: 30px;
-  grid-template-columns: repeat(4, 1fr);
-
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (max-width: 700px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 500px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
 `

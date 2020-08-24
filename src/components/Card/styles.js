@@ -1,5 +1,25 @@
 import styled from 'styled-components'
 
+export const ListCard = styled.div`
+  width: 100%;
+  margin-top: 32px;
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(4, 1fr);
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 500px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`
+
 export const Container = styled.div`
   width: 100%;
   max-height: 376px;

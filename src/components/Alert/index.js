@@ -10,9 +10,11 @@ import {
   ActionsContainer,
 } from './styles'
 import Button from '../Button'
+import api from '../../services/api'
 
-const Alert = ({ title, message, actions, enable, setAlert }) => {
-  const naverDeleted = () => {
+const Alert = ({ title, message, actions, enable, setAlert, id }) => {
+  const naverDeleted = async () => {
+    await api.deleteNaver(id)
     setAlert({
       title: 'Naver excluído',
       message: 'Naver excluído com sucesso!',

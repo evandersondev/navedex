@@ -25,17 +25,39 @@ export default {
 
   async fecthAllNavers() {
     const { data } = await api.get('navers')
-    console.log(data)
+    return data
   },
 
-  async createNaver({ name, age, projects, office, timeJob, avatar }) {
-    await api.post('navers', {
-      name,
-      birthdate: age.toLocaleDateString('pt-BR'),
-      project: projects,
-      job_role: office,
-      admission_date: timeJob.toLocaleDateString('pt-BR'),
-      url: avatar,
+  async showNaver(id) {
+    const { data } = await api.get(`navers/${id}`)
+
+    return {
+      ...data,
+      birthdate: new Date(data.birthdate),
+      admission_date: new Date(data.admission_date),
+    }
+  },
+
+  async updateNaver(id, data) {
+    await api.put(`navers/${id}`, {
+      ...data,
+      birthdate: data.birthdate.toLocaleDateString('pt-BR'),
+      admission_date: data.admission_date.toLocaleDateString('pt-BR'),
     })
+    return true
+  },
+
+  async createNaver(data) {
+    await api.post('navers', {
+      ...data,
+      birthdate: data.birthdate.toLocaleDateString('pt-BR'),
+      admission_date: data.admission_date.toLocaleDateString('pt-BR'),
+    })
+    return true
+  },
+
+  async deleteNaver(id) {
+    await api.delete(`navers/${id}`)
+    return true
   },
 }
