@@ -4,7 +4,7 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 10;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -21,6 +21,10 @@ export const ContentContainer = styled.div`
   padding: 32px;
   position: relative;
   animation: alert ease-out 0.2s;
+
+  @media (max-width: 500px) {
+    height: auto;
+  }
 
   @keyframes alert {
     from {

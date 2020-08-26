@@ -20,6 +20,6 @@ module.exports = {
     'no-undef': 'off',
     'react/display-name': 'off',
     'react/prop-types': [0],
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'off',
   },
 }

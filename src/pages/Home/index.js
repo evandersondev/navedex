@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import api from '../../services/api'
+import api from 'services/api'
 
-import Header from '../../components/Header'
-import Card from '../../components/Card'
-import Alert from '../../components/Alert'
-
+import { Header, Card, Alert, Loading } from 'components'
 import { Container, Content, HeaderContent, EmptyContent } from './styles'
 
 export default () => {
+  const [loading, setLoading] = useState(false)
   const [alert, setAlert] = useState({})
   const [navers, setNavers] = useState([])
 
   useEffect(() => {
-    const getNavers = async () => {
-      setNavers(await api.fecthAllNavers())
-    }
     getNavers()
-  }, [navers])
+  }, [])
+
+  const getNavers = async () => {
+    setLoading(true)
+    setNavers(await api.getAllNavers())
+    setLoading(false)
+  }
 
   return (
     <Container>
-      <Alert {...alert} setAlert={setAlert} />
+      <Alert {...alert} setAlert={setAlert} setLoading={setLoading} />
+      {loading && <Loading />}
 
       <Header />
       <Content>
@@ -31,7 +33,7 @@ export default () => {
         </HeaderContent>
 
         {navers.length > 0 ? (
-          <Card navers={navers} setAlert={setAlert} />
+          <Card navers={navers} setNavers={setNavers} setAlert={setAlert} />
         ) : (
           <EmptyContent>
             <h1>Não há navers cadastrados</h1>

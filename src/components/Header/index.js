@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 
-import LogoImage from '../../assets/logo.svg'
+import LogoImage from 'assets/logo.svg'
 
 import { Container } from './styles'
 

@@ -23,14 +23,13 @@ export default {
     return { token }
   },
 
-  async fecthAllNavers() {
+  async getAllNavers() {
     const { data } = await api.get('navers')
     return data
   },
 
   async showNaver(id) {
     const { data } = await api.get(`navers/${id}`)
-
     return {
       ...data,
       birthdate: new Date(data.birthdate),
@@ -41,8 +40,13 @@ export default {
   async updateNaver(id, data) {
     await api.put(`navers/${id}`, {
       ...data,
-      birthdate: data.birthdate.toLocaleDateString('pt-BR'),
-      admission_date: data.admission_date.toLocaleDateString('pt-BR'),
+      birthdate: data.birthdate.toLocaleDateString('pt-BR', {
+        timeZone: 'UTC',
+      }),
+      admission_date: new Date(data.admission_date).toLocaleDateString(
+        'pt-BR',
+        { timeZone: 'UTC' },
+      ),
     })
     return true
   },

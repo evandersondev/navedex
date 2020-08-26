@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import closeIcon from '../../assets/close.svg'
-import trashIcon from '../../assets/trash.svg'
-import editIcon from '../../assets/edit.svg'
+import closeIcon from 'assets/close.svg'
+import trashIcon from 'assets/trash.svg'
+import editIcon from 'assets/edit.svg'
 
 import {
   Container,
@@ -14,8 +14,8 @@ import {
   ActionsContainer,
 } from './styles'
 
-export default ({ enable, setModal, setAlert, data }) => {
-  const { push } = useHistory()
+export default ({ enable, setModal, setAlert, data, navers, setNavers }) => {
+  const history = useHistory()
   const [naver, setNaver] = useState({})
 
   const handleDeletNaver = id => {
@@ -25,6 +25,9 @@ export default ({ enable, setModal, setAlert, data }) => {
       actions: true,
       enable: true,
       id,
+      navers,
+      setNavers,
+      setModal,
     })
   }
 
@@ -65,7 +68,7 @@ export default ({ enable, setModal, setAlert, data }) => {
               </button>
               <button>
                 <img
-                  onClick={() => push('/edit', { id: naver.id })}
+                  onClick={() => history.push('/edit', { id: naver.id })}
                   src={editIcon}
                   alt="edit"
                 />

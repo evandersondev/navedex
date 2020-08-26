@@ -16,9 +16,11 @@ export const ListCard = styled.div`
   }
 
   @media (max-width: 500px) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
   }
 `
+// 470
+// 380
 
 export const Container = styled.div`
   width: 100%;
@@ -26,6 +28,13 @@ export const Container = styled.div`
   display: flex;
   flex-basis: 280px;
   flex-direction: column;
+
+  @media (max-width: 700px) {
+    max-height: 420px;
+  }
+  @media (max-width: 500px) {
+    max-height: 470px;
+  }
 
   strong {
     font-weight: 600;
@@ -44,6 +53,14 @@ export const AvatarContainer = styled.div`
   display: flex;
   overflow: hidden;
   cursor: pointer;
+
+  @media (max-width: 700px) {
+    height: 330px;
+  }
+
+  @media (max-width: 500px) {
+    height: 380px;
+  }
 
   img {
     object-fit: cover;

@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
+import api from 'services/api'
 
+import backIcon from 'assets/back.svg'
+import { Input, InputDate, Button } from 'components'
 import { ContentContainer, HeaderContent, Form } from './styles'
-import Input from '../Input'
-import InputDate from '../InputDate'
-import Button from '../Button'
-
-import backIcon from '../../assets/back.svg'
-import api from '../../services/api'
 
 export default ({ titlePage, type, onSubmit }) => {
   const { push } = useHistory()
@@ -21,17 +18,18 @@ export default ({ titlePage, type, onSubmit }) => {
   const [admission_date, setAdmissionDate] = useState('')
   const [url, setUrl] = useState('')
 
+  const renderNaver = async () => {
+    const data = await api.showNaver(state.id)
+    setId(data.id)
+    setName(data.name)
+    setBirthdate(data.birthdate)
+    setJobRole(data.job_role)
+    setAdmissionDate(data.admission_date)
+    setProject(data.project)
+    setUrl(data.url)
+  }
+
   useEffect(() => {
-    const renderNaver = async () => {
-      const data = await api.showNaver(state.id)
-      setId(data.id)
-      setName(data.name)
-      setBirthdate(data.birthdate)
-      setJobRole(data.job_role)
-      setAdmissionDate(data.admission_date)
-      setProject(data.project)
-      setUrl(data.url)
-    }
     type === 'edit' && renderNaver()
   }, [type])
 
@@ -54,6 +52,14 @@ export default ({ titlePage, type, onSubmit }) => {
               job_role,
               admission_date,
               url,
+            },
+            states: {
+              setName,
+              setBirthdate,
+              setJobRole,
+              setAdmissionDate,
+              setProject,
+              setUrl,
             },
           })
         }

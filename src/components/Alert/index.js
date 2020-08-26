@@ -1,6 +1,8 @@
 import React from 'react'
+import api from 'services/api'
 
-import closeIcon from '../../assets/close.svg'
+import closeIcon from 'assets/close.svg'
+import { Button } from 'components'
 
 import {
   Container,
@@ -9,10 +11,18 @@ import {
   Message,
   ActionsContainer,
 } from './styles'
-import Button from '../Button'
-import api from '../../services/api'
 
-const Alert = ({ title, message, actions, enable, setAlert, id }) => {
+export default ({
+  title,
+  message,
+  actions,
+  enable,
+  setAlert,
+  id,
+  navers,
+  setNavers,
+  setModal,
+}) => {
   const naverDeleted = async () => {
     await api.deleteNaver(id)
     setAlert({
@@ -20,6 +30,8 @@ const Alert = ({ title, message, actions, enable, setAlert, id }) => {
       message: 'Naver excluído com sucesso!',
       enable: true,
     })
+    setModal({ enable: false })
+    setNavers(navers.filter(naver => naver.id !== id))
   }
 
   const closeAlert = () => {
@@ -49,5 +61,3 @@ const Alert = ({ title, message, actions, enable, setAlert, id }) => {
     </Container>
   )
 }
-
-export default Alert

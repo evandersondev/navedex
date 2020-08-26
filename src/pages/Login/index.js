@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import api from 'services/api'
 
-import LogoImage from '../../assets/logo.svg'
-import Input from '../../components/Input'
-
+import LogoImage from 'assets/logo.svg'
+import { Alert, Button, Input } from 'components'
 import { Container, Form } from './styles'
-import Button from '../../components/Button'
-import api from '../../services/api'
 
 export default () => {
   const token = localStorage.getItem('token')
   const { push } = useHistory()
+  const [alert, setAlert] = useState({})
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   useEffect(() => {
+    const isLogged = () => {
+      token && push('/home')
+    }
     isLogged()
-  }, [])
-
-  const isLogged = () => {
-    token && push('/home')
-  }
+  }, [token, push])
 
   const handleLogin = async e => {
     e.preventDefault()
@@ -30,12 +28,18 @@ export default () => {
       localStorage.setItem('token', token)
       push('/home')
     } catch (err) {
-      console.log(err)
+      setAlert({
+        title: 'Erro no login',
+        message: 'Verifique todos os campos e tente novamente.',
+        enable: true,
+      })
     }
   }
 
   return (
     <Container>
+      <Alert {...alert} setAlert={setAlert} />
+
       <Form onSubmit={handleLogin}>
         <img src={LogoImage} alt="Nave.rs" />
         <Input

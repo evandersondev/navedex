@@ -4,9 +4,10 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1280px;
   margin: auto;
-  height: 100vh;
+  height: 100%;
   padding: 0 32px;
   z-index: 1;
+  padding-bottom: 30px;
 `
 export const Content = styled.div`
   height: calc(100% - 130px);
@@ -41,6 +42,11 @@ export const HeaderContent = styled.div`
   justify-content: space-between;
   margin-top: 44px;
 
+  @media (max-width: 500px) {
+    flex-direction: column;
+    margin-top: 0;
+  }
+
   h2 {
     font-weight: 600;
     font-size: 40px;
@@ -58,6 +64,11 @@ export const HeaderContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (max-width: 500px) {
+      width: 100%;
+      margin-top: 16px;
+  }
 
     &:hover {
       background: #434343;

@@ -4,7 +4,8 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 5;
-  position: absolute;
+  padding: 0 32px;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -12,10 +13,9 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
-  overflow: hidden;
 `
 export const ModalContainer = styled.div`
-  width: 90%;
+  width: 100%;
   max-width: 1007px;
   max-height: 503px;
   margin: auto;
@@ -37,10 +37,18 @@ export const ModalContainer = styled.div`
   @media (max-width: 840px) {
     grid-template-columns: 180px 1fr;
   }
+
+  @media (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
 `
 export const AvatarContainer = styled.div`
   width: 100%;
   height: 100%;
+
+  @media (max-width: 500px) {
+    display: none;
+  }
 
   img {
     object-fit: cover;
@@ -56,6 +64,10 @@ export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media (max-width: 500px) {
+    height: auto;
+  }
 
   > button {
     border: 0;

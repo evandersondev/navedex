@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import editIcon from '../../assets/edit.svg'
-import trashIcon from '../../assets/trash.svg'
+import api from 'services/api'
+
+import editIcon from 'assets/edit.svg'
+import trashIcon from 'assets/trash.svg'
+import { Modal } from 'components'
 
 import {
   ListCard,
@@ -9,11 +12,9 @@ import {
   AvatarContainer,
   ActionsContainer,
 } from './styles'
-import Modal from '../Modal'
-import api from '../../services/api'
 
-export default ({ navers, setAlert }) => {
-  const { push } = useHistory()
+export default ({ navers, setNavers, setAlert }) => {
+  const history = useHistory()
   const [modal, setModal] = useState({})
 
   const handleDeletNaver = id => {
@@ -23,6 +24,9 @@ export default ({ navers, setAlert }) => {
       actions: true,
       enable: true,
       id,
+      navers,
+      setNavers,
+      setModal,
     })
   }
 
@@ -40,7 +44,13 @@ export default ({ navers, setAlert }) => {
 
   return (
     <ListCard>
-      <Modal {...modal} setModal={setModal} setAlert={setAlert} />
+      <Modal
+        {...modal}
+        setModal={setModal}
+        navers={navers}
+        setNavers={setNavers}
+        setAlert={setAlert}
+      />
 
       {navers.map(naver => (
         <Container key={naver.id}>
@@ -55,7 +65,7 @@ export default ({ navers, setAlert }) => {
             </button>
             <button
               type="button"
-              onClick={() => push('/edit', { id: naver.id })}
+              onClick={() => history.push('/edit', { id: naver.id })}
             >
               <img src={editIcon} alt="edit" />
             </button>

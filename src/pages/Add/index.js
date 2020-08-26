@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
-import api from '../../services/api'
+import api from 'services/api'
 
-import Header from '../../components/Header'
-import Alert from '../../components/Alert'
-import Form from '../../components/Form'
-
+import { Header, Alert, Form } from 'components'
 import { Container } from './styles'
 
 export default () => {
   const [alert, setAlert] = useState({})
 
-  const handleSubmitForm = async (e, { data }) => {
+  const handleSubmitForm = async (e, { data, states }) => {
     e.preventDefault()
+
     try {
       await api.createNaver(data)
 
@@ -20,6 +18,13 @@ export default () => {
         message: 'Naver criado com sucesso!',
         enable: true,
       })
+
+      states.setName('')
+      states.setBirthdate('')
+      states.setJobRole('')
+      states.setAdmissionDate('')
+      states.setProject('')
+      states.setUrl('')
     } catch (err) {
       setAlert({
         title: 'Erro ao cadastrar o naver!',

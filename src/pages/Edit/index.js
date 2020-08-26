@@ -1,10 +1,7 @@
 import React, { useState } from 'react'
-import api from '../../services/api'
+import api from 'services/api'
 
-import Header from '../../components/Header'
-import Alert from '../../components/Alert'
-import Form from '../../components/Form'
-
+import { Header, Alert, Form } from 'components'
 import { Container } from './styles'
 
 export default () => {
