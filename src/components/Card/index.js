@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { useModal } from 'context/Modal'
+import { useAlert } from 'context/Alert'
 import api from 'services/api'
 
 import editIcon from 'assets/edit.svg'
@@ -13,44 +15,28 @@ import {
   ActionsContainer,
 } from './styles'
 
-export default ({ navers, setNavers, setAlert }) => {
-  const history = useHistory()
-  const [modal, setModal] = useState({})
+export default ({ navers }) => {
+  const { showModal } = useModal()
+  const { showAlert } = useAlert()
+  const { push } = useHistory()
 
   const handleDeletNaver = id => {
-    setAlert({
+    showAlert({
+      id,
+      actions: true,
       title: 'Excluir Naver',
       message: 'Tem certeza que deseja excluir este Naver?',
-      actions: true,
-      enable: true,
-      id,
-      navers,
-      setNavers,
-      setModal,
     })
   }
 
   const handleModalShow = async id => {
     const data = await api.showNaver(id)
-    setModal({
-      enable: !!data,
-      data: {
-        ...data,
-        birthdate: data.birthdate.toLocaleDateString('pt-BR'),
-        admission_date: data.admission_date.toLocaleDateString('pt-BR'),
-      },
-    })
+    showModal(data)
   }
 
   return (
     <ListCard>
-      <Modal
-        {...modal}
-        setModal={setModal}
-        navers={navers}
-        setNavers={setNavers}
-        setAlert={setAlert}
-      />
+      <Modal />
 
       {navers.map(naver => (
         <Container key={naver.id}>
@@ -63,10 +49,7 @@ export default ({ navers, setNavers, setAlert }) => {
             <button type="button" onClick={() => handleDeletNaver(naver.id)}>
               <img src={trashIcon} alt="delete" />
             </button>
-            <button
-              type="button"
-              onClick={() => history.push('/edit', { id: naver.id })}
-            >
+            <button type="button" onClick={() => push(`edit/${naver.id}`)}>
               <img src={editIcon} alt="edit" />
             </button>
           </ActionsContainer>

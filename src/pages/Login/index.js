@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useAlert } from 'context/Alert'
 import api from 'services/api'
 
 import LogoImage from 'assets/logo.svg'
@@ -7,9 +8,10 @@ import { Alert, Button, Input } from 'components'
 import { Container, Form } from './styles'
 
 export default () => {
-  const token = localStorage.getItem('token')
   const { push } = useHistory()
-  const [alert, setAlert] = useState({})
+  const { showAlert } = useAlert()
+  const token = localStorage.getItem('token')
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -28,17 +30,16 @@ export default () => {
       localStorage.setItem('token', token)
       push('/home')
     } catch (err) {
-      setAlert({
+      showAlert({
         title: 'Erro no login',
         message: 'Verifique todos os campos e tente novamente.',
-        enable: true,
       })
     }
   }
 
   return (
     <Container>
-      <Alert {...alert} setAlert={setAlert} />
+      <Alert />
 
       <Form onSubmit={handleLogin}>
         <img src={LogoImage} alt="Nave.rs" />

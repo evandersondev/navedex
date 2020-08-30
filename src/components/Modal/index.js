@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
+import { useModal } from 'context/Modal'
+import { useAlert } from 'context/Alert'
 
 import closeIcon from 'assets/close.svg'
 import trashIcon from 'assets/trash.svg'
@@ -14,37 +16,26 @@ import {
   ActionsContainer,
 } from './styles'
 
-export default ({ enable, setModal, setAlert, data, navers, setNavers }) => {
+export default () => {
   const history = useHistory()
-  const [naver, setNaver] = useState({})
+  const { showAlert } = useAlert()
+  const { modal, closeModal } = useModal()
 
   const handleDeletNaver = id => {
-    setAlert({
+    showAlert({
+      id,
+      actions: true,
       title: 'Excluir Naver',
       message: 'Tem certeza que deseja excluir este Naver?',
-      actions: true,
-      enable: true,
-      id,
-      navers,
-      setNavers,
-      setModal,
     })
   }
 
-  useEffect(() => {
-    setNaver(data)
-  }, [data])
-
-  const closeModal = () => {
-    setModal({ enable: false })
-    setNaver({})
-  }
   return (
-    <Container enable={enable}>
-      {naver && (
+    <Container enable={modal.enable}>
+      {modal.enable && (
         <ModalContainer>
           <AvatarContainer>
-            <img src={naver.url} alt={naver.name} />
+            <img src={modal.data.url} alt={modal.data.name} />
           </AvatarContainer>
           <InfoContainer>
             <button type="button" onClick={closeModal}>
@@ -52,26 +43,28 @@ export default ({ enable, setModal, setAlert, data, navers, setNavers }) => {
             </button>
 
             <Info>
-              <h2>{naver.name}</h2>
-              <p>{naver.job_role}</p>
+              <h2>{modal.data.name}</h2>
+              <p>{modal.data.job_role}</p>
               <strong>Idade</strong>
-              <p>{naver.birthdate}</p>
+              <p>{modal.data.birthdate}</p>
               <strong>Tempo de empresa</strong>
-              <p>{naver.admission_date}</p>
+              <p>{modal.data.admission_date}</p>
               <strong>Projetos que participou</strong>
-              <p>{naver.project}</p>
+              <p>{modal.data.project}</p>
             </Info>
 
             <ActionsContainer>
-              <button type="button" onClick={() => handleDeletNaver(naver.id)}>
+              <button
+                type="button"
+                onClick={() => handleDeletNaver(modal.data.id)}
+              >
                 <img src={trashIcon} alt="delete" />
               </button>
-              <button>
-                <img
-                  onClick={() => history.push('/edit', { id: naver.id })}
-                  src={editIcon}
-                  alt="edit"
-                />
+              <button
+                type="button"
+                onClick={() => history.push(`edit/${modal.data.id}`)}
+              >
+                <img src={editIcon} alt="edit" />
               </button>
             </ActionsContainer>
           </InfoContainer>

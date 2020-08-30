@@ -1,9 +1,9 @@
 module.exports = {
   env: {
     browser: true,
-    es6: true,
+    es2020: true,
   },
-  extends: ['plugin:react/recommended', 'standard', 'prettier'],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'prettier'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -11,7 +11,7 @@ module.exports = {
     ecmaVersion: 11,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier', 'react-hooks'],
   rules: {
     'prettier/prettier': 'error',
     'no-console': 'off',
@@ -20,6 +20,7 @@ module.exports = {
     'no-undef': 'off',
     'react/display-name': 'off',
     'react/prop-types': [0],
+    'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'off',
   },
 }

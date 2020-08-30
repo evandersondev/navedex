@@ -7,12 +7,7 @@ import { Container, Content, HeaderContent, EmptyContent } from './styles'
 
 export default () => {
   const [loading, setLoading] = useState(false)
-  const [alert, setAlert] = useState({})
   const [navers, setNavers] = useState([])
-
-  useEffect(() => {
-    getNavers()
-  }, [])
 
   const getNavers = async () => {
     setLoading(true)
@@ -20,9 +15,13 @@ export default () => {
     setLoading(false)
   }
 
+  useEffect(() => {
+    getNavers()
+  }, [])
+
   return (
     <Container>
-      <Alert {...alert} setAlert={setAlert} setLoading={setLoading} />
+      <Alert navers={navers} setNavers={setNavers} />
       {loading && <Loading />}
 
       <Header />
@@ -33,7 +32,7 @@ export default () => {
         </HeaderContent>
 
         {navers.length > 0 ? (
-          <Card navers={navers} setNavers={setNavers} setAlert={setAlert} />
+          <Card navers={navers} setNavers={setNavers} />
         ) : (
           <EmptyContent>
             <h1>Não há navers cadastrados</h1>

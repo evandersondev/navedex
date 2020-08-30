@@ -1,4 +1,6 @@
 import React from 'react'
+import { useAlert } from 'context/Alert'
+import { useModal } from 'context/Modal'
 import api from 'services/api'
 
 import closeIcon from 'assets/close.svg'
@@ -12,41 +14,29 @@ import {
   ActionsContainer,
 } from './styles'
 
-export default ({
-  title,
-  message,
-  actions,
-  enable,
-  setAlert,
-  id,
-  navers,
-  setNavers,
-  setModal,
-}) => {
-  const naverDeleted = async () => {
-    await api.deleteNaver(id)
-    setAlert({
+export default ({ navers, setNavers }) => {
+  const { alert, naverId, closeAlert, showAlert } = useAlert()
+  const { closeModal } = useModal()
+
+  const handleDeleteNaver = async () => {
+    await api.deleteNaver(naverId)
+    showAlert({
       title: 'Naver excluído',
       message: 'Naver excluído com sucesso!',
-      enable: true,
     })
-    setModal({ enable: false })
-    setNavers(navers.filter(naver => naver.id !== id))
-  }
-
-  const closeAlert = () => {
-    setAlert({ enable: false })
+    closeModal()
+    setNavers(navers.filter(naver => naver.id !== naverId))
   }
 
   return (
-    <Container show={enable}>
-      <ContentContainer actions={actions}>
+    <Container show={alert.enable}>
+      <ContentContainer actions={alert.actions}>
         <button type="button" onClick={closeAlert}>
           <img src={closeIcon} alt="close" />
         </button>
-        <Title>{title}</Title>
-        <Message>{message}</Message>
-        {actions && (
+        <Title>{alert.title}</Title>
+        <Message>{alert.message}</Message>
+        {alert.actions && (
           <ActionsContainer>
             <Button
               type="button"
@@ -54,7 +44,7 @@ export default ({
               name="Cancelar"
               color="light"
             />
-            <Button type="button" onClick={naverDeleted} name="Excluir" />
+            <Button type="button" onClick={handleDeleteNaver} name="Excluir" />
           </ActionsContainer>
         )}
       </ContentContainer>
