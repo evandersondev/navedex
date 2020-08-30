@@ -5,11 +5,13 @@ NAVEDEX
 </h1>
 <br>
 <br>
-  <img  src="./src/assets/login.png" alt="YOUR_PROJECT_NAME" width="100%">
+  <div style="border: 1px solid #333">
+    <img  src="./src/assets/login.png" alt="YOUR_PROJECT_NAME" width="100%">
 
   <img src="./src/assets/home.png" alt="YOUR_PROJECT_NAME" width="100%">
 
   <img src="./src/assets/modal.png" alt="YOUR_PROJECT_NAME" width="100%">
+  </div>
 <br>
 <br>
 <br>
@@ -37,6 +39,8 @@ NAVEDEX
 > `yarn start` or `npm run start`.
 
 > You can access in your browser the web application http://localhost:3000.
+
+> Online application at **<a href="https://navedexrs.netlify.app/" target="_blank">PokFinder</a>**
 
 ## Features
 
