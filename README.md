@@ -40,7 +40,7 @@ NAVEDEX
 
 > You can access in your browser the web application http://localhost:3000.
 
-> Online application at **<a href="https://navedexrs.netlify.app/" target="_blank">PokFinder</a>**
+> Online application at **<a href="https://navedexrs.netlify.app/" target="_blank">Navedexrs</a>**
 
 ## Features
 
