@@ -28,7 +28,7 @@ export default () => {
     })
   }, [id])
 
-  const handleSubmitForm = async (e, { id, data }) => {
+  const handleSubmitForm = async (e, { data }) => {
     e.preventDefault()
 
     try {
